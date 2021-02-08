@@ -39,20 +39,17 @@ const fs = require('fs');
             innerHTML
         }))
 
-        console.log(companyList)
+        setInterval(() => {
+            companyList.forEach((item, index) => {
+                let company = /[0-9]{14}/g.exec(item.innerHTML)
 
-        // setInterval(() => {
-        //     document.querySelectorAll('.in-table-deion').forEach((item, index) => {
-        //         let empresa = /[0-9]{14}/g.exec(item.innerHTML)
-
-        //         if (empresa != null) {
-        //             console.log(empresa.input)
-        //         }
-        //         else {
-        //             console.lg("SEM EMPRESAS NO MOMENTO")
-        //         }
-        //     })
-        // }, 5000)
+                if (company !== null) {
+                    console.log(company.input)
+                } else {
+                    console.log('sem empresa no momento')
+                }
+            })
+        }, 5000);
     })
 
     
@@ -67,7 +64,7 @@ const fs = require('fs');
 })();
 
 async function autoScroll(page) {
-    await page.waitForSelector('.dataTables_scrollBody')
+    await page.waitForSelector('.in-table-description')
     await page.evaluate(async () => {
         await new Promise((resolve, reject) => {
             let totalHeight = 0
